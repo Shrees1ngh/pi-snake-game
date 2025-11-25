@@ -1,20 +1,21 @@
-🐍 Raspberry Pi Zero Snake Game
+# Raspberry Pi Zero Snake Game
 
-A simple and colorful Snake Game made for the Raspberry Pi Zero W using the Waveshare 1.44" LCD HAT (128×128 ST7735S).
+A simple and colorful Snake game made for the Raspberry Pi Zero W using the Waveshare 1.44" LCD HAT (128×128, ST7735S).
 
 This project lets you play Snake using the joystick and buttons on the LCD HAT — perfect for a mini handheld game setup.
 
-📌 Hardware Used
+---
 
-Raspberry Pi Zero W (v1.1)
+## Hardware Used
 
-Waveshare 1.44" LCD HAT (ST7735S, 128×128 px)
+- Raspberry Pi Zero W (v1.1)
+- Waveshare 1.44" LCD HAT (ST7735S, 128×128 px)
+- MicroSD Card (8GB+)
+- 5V Power Supply / Phone Charger
 
-MicroSD Card (8GB+)
+---
 
-5V Power Supply / Phone Charger
-
-📦 Python Libraries Used
+## Python Libraries Used
 
 These are the required libraries:
 
@@ -23,104 +24,156 @@ luma.lcd
 RPi.GPIO
 Pillow
 
+cpp
+Copy code
 
-These are installed automatically when you run:
+Install them using:
 
 pip3 install -r requirements.txt
 
-🚀 Setup Guide (Step-by-Step for Beginners)
-1. Update Raspberry Pi
+yaml
+Copy code
+
+---
+
+## Setup Guide (Beginner Friendly)
+
+### 1. Update Raspberry Pi
+
 sudo apt-get update
 sudo apt-get upgrade -y
 
-2. Enable SPI (Required for Display)
+yaml
+Copy code
+
+---
+
+### 2. Enable SPI (Required for Display)
+
 sudo raspi-config
 
+yaml
+Copy code
 
 Go to:
 
-Interface Options → SPI → Enable
+**Interface Options → SPI → Enable**
 
-Reboot if asked.
+Reboot if required.
 
-3. Install Required System Packages
-sudo apt-get install python3-pip python3-pil python3-numpy \
+---
+
+### 3. Install System Dependencies
+
+sudo apt-get install python3-pip python3-pil python3-numpy
 libopenjp2-7 libtiff5 libjpeg-dev zlib1g-dev git -y
 
-4. Download This Game
+yaml
+Copy code
 
-Clone your GitHub repo:
+---
+
+### 4. Download This Repository
 
 git clone https://github.com/Shrees1ngh/pi-snake-game.git
 cd pi-snake-game
 
-5. Install Python Dependencies
+yaml
+Copy code
 
-Just run:
+---
+
+### 5. Install Python Dependencies
 
 pip3 install -r requirements.txt
 
+yaml
+Copy code
 
-No virtual environment needed — simple setup.
+---
 
-🎮 Controls (LCD HAT Buttons)
-Button / Joystick	Action
-Joystick Up	Move Up
-Joystick Down	Move Down
-Joystick Left	Move Left
-Joystick Right	Move Right
-Joystick Press	Pause / Resume
-Key 1	Pause
-Key 2	Start / Restart
-Key 3	Exit Game
-🕹️ Run the Game
+## Controls
+
+| Button / Joystick | Action |
+|-------------------|--------|
+| Joystick Up | Move Up |
+| Joystick Down | Move Down |
+| Joystick Left | Move Left |
+| Joystick Right | Move Right |
+| Joystick Press | Pause / Resume |
+| Key 1 | Pause |
+| Key 2 | Start / Restart |
+| Key 3 | Exit Game |
+
+---
+
+## Run the Game
+
 python3 snake.py
 
+yaml
+Copy code
 
-Game will start immediately on the LCD.
+---
 
-🔧 Auto-Start When Pi Boots (Optional)
+## Auto-Start on Boot (Optional)
 
-If you want the game to run automatically on boot:
+If you want the game to start automatically on boot:
 
 sudo nano /etc/rc.local
 
+javascript
+Copy code
 
-Add this before exit 0:
+Add this above `exit 0`:
 
 /usr/bin/python3 /home/pi/pi-snake-game/snake.py &
 
+yaml
+Copy code
 
-Save → Exit → Reboot.
+Save and reboot.
 
-❗ Troubleshooting
-Screen is white / black
+---
 
-Make sure SPI is enabled
+## Troubleshooting
 
-Make sure display is fully connected
+### Screen stays white / black
+- SPI not enabled  
+- Display not connected properly  
+- Restart Raspberry Pi  
 
-Try restarting the Pi
-
-Error: Module Not Found
-
-Run again:
+### ModuleNotFoundError
+Run:
 
 pip3 install -r requirements.txt
 
-High score not saving
+python
+Copy code
 
-Try:
+### High score not saving
+Run once with:
 
 sudo python3 snake.py
 
-📁 Project Structure
+yaml
+Copy code
+
+---
+
+## Project Structure
+
 pi-snake-game/
-│── snake.py           # Main game file
-│── highscore.txt      # Saved automatically
-│── requirements.txt   # Python dependencies
-│── README.md          # This file
+│── snake.py
+│── highscore.txt
+│── requirements.txt
+│── README.md
 
-📝 License
+yaml
+Copy code
 
-Free to use, modify, and improve.
+---
+
+## License
+
+Free to use and modify.
