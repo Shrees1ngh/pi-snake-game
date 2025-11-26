@@ -1,179 +1,241 @@
-# Raspberry Pi Zero Snake Game
+Python Snake for Raspberry Pi Zero W (Waveshare LCD HAT)
+========================================================
 
-A simple and colorful Snake game made for the Raspberry Pi Zero W using the Waveshare 1.44" LCD HAT (128×128, ST7735S).
+A classic Snake game written in Python, designed specifically for the **Raspberry Pi Zero W** paired with the **Waveshare 1.44inch LCD HAT** (ST7735S Driver).
 
-This project lets you play Snake using the joystick and buttons on the LCD HAT — perfect for a mini handheld game setup.
+This project uses the `luma.lcd` library for rendering and `RPi.GPIO` for the HAT's joystick and button inputs.
 
----
+Hardware Requirements
+---------------------
 
-## Hardware Used
+1.  **Raspberry Pi Zero W** (v1.1 or similar).
 
-- Raspberry Pi Zero W (v1.1)
-- Waveshare 1.44" LCD HAT (ST7735S, 128×128 px)
-- MicroSD Card (8GB+)
-- 5V Power Supply / Phone Charger
+2.  **Waveshare 1.44inch LCD HAT** (128x128 pixel resolution).
 
----
+3.  MicroSD Card (8GB+).
 
-## Python Libraries Used
+4.  Power supply (Micro USB).
 
-These are the required libraries:
+🛠️ Complete Setup Guide (From Scratch)
+---------------------------------------
 
-luma.core
-luma.lcd
-RPi.GPIO
-Pillow
+If you have a brand new Raspberry Pi Zero W, follow this guide to set it up "headless" (without a monitor/keyboard attached).
 
-cpp
-Copy code
+### Phase 1: Flashing the OS
 
-Install them using:
+You will need a computer (Windows/Mac/Linux) with an SD card reader.
 
-pip3 install -r requirements.txt
+1.  Download and install [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/ "null").
 
-yaml
-Copy code
+2.  Insert your MicroSD card into your computer.
 
----
+3.  Open Raspberry Pi Imager.
 
-## Setup Guide (Beginner Friendly)
+4.  **Choose OS:** Select `Raspberry Pi OS (other)` -> `Raspberry Pi OS Lite (32-bit)`.
 
-### 1. Update Raspberry Pi
+    -   *Note: The "Lite" version is best for this game as it uses less memory and boots faster.*
 
-sudo apt-get update
-sudo apt-get upgrade -y
+5.  **Choose Storage:** Select your SD card.
 
-yaml
-Copy code
+6.  **⚙️ IMPORTANT: Configure Settings (The Gear Icon)** Click the gear icon (bottom right) to open Advanced Options. Set these up now so you don't need a monitor later:
 
----
+    -   **Set Hostname:** e.g., `snake-pi`.
 
-### 2. Enable SPI (Required for Display)
+    -   **Enable SSH:** Check this box. Select "Use password authentication".
 
+    -   **Set username and password:** Create a user (e.g., User: `pi`, Pass: `raspberry`).
+
+    -   **Configure Wireless LAN:** Enter your Wi-Fi Name (SSID) and Password. Select your country code.
+
+7.  Click **Save**, then click **Write**.
+
+8.  Wait for the verification to finish, then remove the SD card.
+
+### Phase 2: Connecting via SSH
+
+1.  Insert the SD card into your Raspberry Pi Zero W.
+
+2.  Attach the **Waveshare LCD HAT** to the GPIO header.
+
+3.  Plug in the power cable. Wait about 2-3 minutes for the first boot.
+
+4.  Open **Command Prompt** (Windows), **PowerShell**, or **Terminal** (Mac/Linux) on your computer.
+
+5.  Type the following command (replace `pi` and `snake-pi` with the username/hostname you set in Phase 1):
+
+    ```
+    ssh pi@snake-pi.local
+
+    ```
+
+    -   *If you didn't set a hostname, try `ssh pi@raspberrypi.local`.*
+
+    -   *If that doesn't work, check your router to find the Pi's IP address (e.g., 192.168.1.50) and run `ssh pi@192.168.1.50`.*
+
+6.  Type `yes` when asked to continue connecting.
+
+7.  Enter the password you created. You are now controlling your Pi remotely!
+
+### Phase 3: Enable Screen Hardware (SPI)
+
+Once logged in via SSH, run:
+
+```
 sudo raspi-config
 
-yaml
-Copy code
+```
 
-Go to:
+1.  Navigate to **Interface Options**.
 
-**Interface Options → SPI → Enable**
+2.  Select **SPI**.
 
-Reboot if required.
+3.  Select **Yes** to enable the SPI interface.
 
----
+4.  Select **Finish** and ask it to **Reboot**.
 
-### 3. Install System Dependencies
+5.  Wait 1 minute, then SSH back in (`ssh pi@snake-pi.local`).
 
-sudo apt-get install python3-pip python3-pil python3-numpy
-libopenjp2-7 libtiff5 libjpeg-dev zlib1g-dev git -y
+### Phase 4: Install Dependencies
 
-yaml
-Copy code
+The screen drivers require specific system libraries. Copy and paste this command:
 
----
+```
+sudo apt-get update
+sudo apt-get install python3-dev python3-pip python3-pil libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libopenjp2-7 libtiff5 git -y
 
-### 4. Download This Repository
+```
 
-git clone https://github.com/Shrees1ngh/pi-snake-game.git
-cd pi-snake-game
+### Phase 5: Install and Run the Game
 
-yaml
-Copy code
+1.  **Clone the repository:**
 
----
+    ```
+    git clone [https://github.com/Shrees1ngh/pi-snake-game.git](https://github.com/Shrees1ngh/pi-snake-game.git)
+    cd pi-snake-game
 
-### 5. Install Python Dependencies
+    ```
 
-pip3 install -r requirements.txt
+2.  **Install Python requirements:**
 
-yaml
-Copy code
+    ```
+    pip3 install -r requirements.txt
 
----
+    ```
 
-## Controls
+3.  **Run the game:**
 
-| Button / Joystick | Action |
-|-------------------|--------|
-| Joystick Up | Move Up |
-| Joystick Down | Move Down |
-| Joystick Left | Move Left |
-| Joystick Right | Move Right |
-| Joystick Press | Pause / Resume |
-| Key 1 | Pause |
-| Key 2 | Start / Restart |
-| Key 3 | Exit Game |
+    ```
+    python3 snake_game.py
 
----
+    ```
 
-## Run the Game
+🎮 How to Play
+--------------
 
-python3 snake.py
+### Controls (Waveshare HAT)
 
-yaml
-Copy code
+|
 
----
+Button
 
-## Auto-Start on Boot (Optional)
+ |
 
-If you want the game to start automatically on boot:
+Action
 
-sudo nano /etc/rc.local
+ |
+|
 
-javascript
-Copy code
+**Joystick Up**
 
-Add this above `exit 0`:
+ |
 
-/usr/bin/python3 /home/pi/pi-snake-game/snake.py &
+Move Up
 
-yaml
-Copy code
+ |
+|
 
-Save and reboot.
+**Joystick Down**
 
----
+ |
 
-## Troubleshooting
+Move Down
 
-### Screen stays white / black
-- SPI not enabled  
-- Display not connected properly  
-- Restart Raspberry Pi  
+ |
+|
 
-### ModuleNotFoundError
-Run:
+**Joystick Left**
 
-pip3 install -r requirements.txt
+ |
 
-python
-Copy code
+Move Left
 
-### High score not saving
-Run once with:
+ |
+|
 
-sudo python3 snake.py
+**Joystick Right**
 
-yaml
-Copy code
+ |
 
----
+Move Right
 
-## Project Structure
+ |
+|
 
-pi-snake-game/
-│── snake.py
-│── highscore.txt
-│── requirements.txt
-│── README.md
+**Joystick Press**
 
-yaml
-Copy code
+ |
 
----
+Pause Game
 
-## License
+ |
+|
 
-Free to use and modify.
+**Key 1**
+
+ |
+
+Pause Game
+
+ |
+|
+
+**Key 2**
+
+ |
+
+**Start Game / Restart**
+
+ |
+|
+
+**Key 3**
+
+ |
+
+Exit to Terminal
+
+ |
+
+### Game Features
+
+-   **High Score:** Automatically saves your best score to `highscore.txt`.
+
+-   **Speed Ramp:** The snake gets faster as you eat more food.
+
+-   **Colors:** Dark Green head, gradient body, red food.
+
+🔧 Troubleshooting
+------------------
+
+-   **"Host not found" when SSHing?** Ensure your computer and the Pi are on the exact same Wi-Fi network. If `snake-pi.local` fails, you must find the IP address of the Pi using your router's admin page or a phone app like "Fing".
+
+-   **Screen is black?** Make sure you enabled SPI in `sudo raspi-config`.
+
+-   **Colors look inverted?** Open `snake_game.py` and change `bgr=True` to `bgr=False` in the `device = st7735(...)` line.
+
+-   **Screen has static on edges?** Adjust `v_offset` or `h_offset` in the `st7735` initialization in the code (currently set to `v_offset=2`).
+
+License
+-------
+
+Open Source. Feel free to modify and improve!
