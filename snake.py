@@ -20,8 +20,6 @@ Dependencies:
 Usage:
     Run the script directly: python3 snake_game.py
 
-Author: [Your Name/Username]
-License: MIT (or your preferred license)
 """
 
 import sys
