@@ -5,16 +5,25 @@ A classic Snake game written in Python, designed specifically for the **Raspberr
 
 This project uses the `luma.lcd` library for rendering and `RPi.GPIO` for the HAT's joystick and button inputs.
 
+Game Screenshots
+----------------
+![IMG_20251126_092654315_HDR_AE~2](https://github.com/user-attachments/assets/32b64dbf-21c6-4b3c-9869-b4aff18ad3ae)
+
+
 Hardware Requirements
 ---------------------
 
 1.  **Raspberry Pi Zero W** (v1.1 or similar).
+![IMG_20251126_090319991_HDR_AE](https://github.com/user-attachments/assets/39898ded-6426-4c4c-96c6-39cce3d04d14)
+![IMG_20251126_090239718_HDR_AE](https://github.com/user-attachments/assets/7aea283f-b9d8-4fba-84a3-5e95fa49a048)
 
-2.  **Waveshare 1.44inch LCD HAT** (128x128 pixel resolution).
+3.  **Waveshare 1.44inch LCD HAT** (128x128 pixel resolution).
+![IMG_20251126_090522471_HDR_AE](https://github.com/user-attachments/assets/23b4d88e-3e60-465f-b748-aea6b8450f59)
+![IMG_20251126_090609639_HDR_AE](https://github.com/user-attachments/assets/911fb1c0-acea-4053-85ec-f4ed92031451)
 
-3.  MicroSD Card (8GB+).
+5.  MicroSD Card (8GB+).
 
-4.  Power supply (Micro USB).
+6.  Power supply (Micro USB).
 
 🛠️ Complete Setup Guide (From Scratch)
 ---------------------------------------
@@ -131,90 +140,31 @@ sudo apt-get install python3-dev python3-pip python3-pil libjpeg-dev zlib1g-dev 
 
 🎮 How to Play
 --------------
+### Project Structure
+
+pi-snake-game/
+
+│── snake.py           # Main game script
+
+│── highscore.txt      # Auto-created
+
+│── requirements.txt   # Python dependencies
+
+│── README.md          # Documentation
 
 ### Controls (Waveshare HAT)
 
-|
+| **Button**         | **Action**               |
+| ------------------ | ------------------------ |
+| **Joystick Up**    | Move Up                  |
+| **Joystick Down**  | Move Down                |
+| **Joystick Left**  | Move Left                |
+| **Joystick Right** | Move Right               |
+| **Joystick Press** | Pause Game               |
+| **Key 1**          | Pause Game               |
+| **Key 2**          | **Start Game / Restart** |
+| **Key 3**          | Exit to Terminal         |
 
-Button
-
- |
-
-Action
-
- |
-|
-
-**Joystick Up**
-
- |
-
-Move Up
-
- |
-|
-
-**Joystick Down**
-
- |
-
-Move Down
-
- |
-|
-
-**Joystick Left**
-
- |
-
-Move Left
-
- |
-|
-
-**Joystick Right**
-
- |
-
-Move Right
-
- |
-|
-
-**Joystick Press**
-
- |
-
-Pause Game
-
- |
-|
-
-**Key 1**
-
- |
-
-Pause Game
-
- |
-|
-
-**Key 2**
-
- |
-
-**Start Game / Restart**
-
- |
-|
-
-**Key 3**
-
- |
-
-Exit to Terminal
-
- |
 
 ### Game Features
 
