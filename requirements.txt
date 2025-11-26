@@ -1,0 +1,4 @@
+luma.lcd 
+luma.core 
+RPi.GPIO 
+Pillow
